@@ -1,19 +1,18 @@
-from flask import Flask, jsonify
-import random
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
-# Sample data (can be replaced with database later)
-recipes = ["Fried Rice", "Pancake", "Spaghetti", "Salad"]
-
 @app.route('/')
 def home():
-    return "Omakase Home"
+    return render_template('index.html')
 
-@app.route('/random')
-def random_recipe():
-    recipe = random.choice(recipes)
-    return jsonify({"recipe": recipe})
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/random-page')
+def random_page():
+    return render_template('random.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
