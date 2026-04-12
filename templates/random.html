@@ -31,17 +31,18 @@
 <script>
 function spin() {
 
-    let recipes = [
-        "Pancake 🥞",
-        "Spaghetti 🍝",
-        "Fried Rice 🍚",
-        "Chicken Rice 🍗"
-    ];
+    fetch('/random')
+    .then(response => response.json())
+    .then(data => {
 
-    let random = recipes[Math.floor(Math.random() * recipes.length)];
+        document.getElementById("result").innerText =
+            "🎁 You got: " + data.recipe;
 
-    document.getElementById("result").innerText =
-        "🎁 You got: " + random;
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+
 }
 </script>
 
