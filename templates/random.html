@@ -1,7 +1,49 @@
-<h1>Random Recipe</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gacha Recipe System</title>
 
-<button>Spin</button>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
 
-<p>Result will show here</p>
+<body>
 
-<a href="/">Back to Home</a>
+<div class="container">
+
+    <h1>🎰 Gacha Recipe System</h1>
+
+    <!-- GACHA IMAGE -->
+    <img class="gacha-img" src="https://png.pngtree.com/png-clipart/20201208/original/pngtree-realistic-blue-gacha-machine-illustration-isolated-vector-png-image_5594671.jpg">
+
+    <div class="machine-box">
+
+        <div id="result">
+            Click spin to get your recipe 🍽️
+        </div>
+
+        <button onclick="spin()">SPIN 🎲</button>
+
+    </div>
+
+</div>
+
+<script>
+function spin() {
+
+    let recipes = [
+        "Pancake 🥞",
+        "Spaghetti 🍝",
+        "Fried Rice 🍚",
+        "Chicken Rice 🍗"
+    ];
+
+    let random = recipes[Math.floor(Math.random() * recipes.length)];
+
+    document.getElementById("result").innerText =
+        "🎁 You got: " + random;
+}
+</script>
+
+</body>
+</html>
