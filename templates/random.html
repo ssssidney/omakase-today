@@ -14,7 +14,8 @@
     <h1>🎰 Gacha Recipe System</h1>
 
     <!-- GACHA IMAGE -->
-    <img class="gacha-img" src="https://png.pngtree.com/png-clipart/20201208/original/pngtree-realistic-blue-gacha-machine-illustration-isolated-vector-png-image_5594671.jpg">
+    <img id="gachaImg" class="gacha-img"
+         src="https://png.pngtree.com/png-clipart/20201208/original/pngtree-realistic-blue-gacha-machine-illustration-isolated-vector-png-image_5594671.jpg">
 
     <div class="machine-box">
 
@@ -33,34 +34,32 @@ function spin() {
 
     let resultBox = document.getElementById("result");
     let button = document.querySelector("button");
+    let gachaImg = document.getElementById("gachaImg");
 
-    // 1. disable button (防 spam click)
+    // disable button
     button.disabled = true;
 
-    // 2. show loading text
-    resultBox.innerText = "🎰 Spinning...";
+    // start spin animation
+    gachaImg.classList.add("spin");
 
-    // 3. fake delay (gacha feel)
+    resultBox.innerText = "Spinning...";
+
     setTimeout(() => {
 
         fetch('/random')
-        .then(response => response.json())
+        .then(res => res.json())
         .then(data => {
 
-            // 4. DOM update result
-            resultBox.innerText = "🎁 You got: " + data.recipe;
+            resultBox.innerText = "You got: " + data.recipe;
 
-            // 5. re-enable button
+            // stop animation
+            gachaImg.classList.remove("spin");
+
             button.disabled = false;
 
-        })
-        .catch(error => {
-            console.error(error);
-            resultBox.innerText = "Error!";
-            button.disabled = false;
         });
 
-    }, 1000); // 1 second delay
+    }, 1000);
 }
 </script>
 
