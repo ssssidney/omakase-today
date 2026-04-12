@@ -31,18 +31,36 @@
 <script>
 function spin() {
 
-    fetch('/random')
-    .then(response => response.json())
-    .then(data => {
+    let resultBox = document.getElementById("result");
+    let button = document.querySelector("button");
 
-        document.getElementById("result").innerText =
-            "🎁 You got: " + data.recipe;
+    // 1. disable button (防 spam click)
+    button.disabled = true;
 
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
+    // 2. show loading text
+    resultBox.innerText = "🎰 Spinning...";
 
+    // 3. fake delay (gacha feel)
+    setTimeout(() => {
+
+        fetch('/random')
+        .then(response => response.json())
+        .then(data => {
+
+            // 4. DOM update result
+            resultBox.innerText = "🎁 You got: " + data.recipe;
+
+            // 5. re-enable button
+            button.disabled = false;
+
+        })
+        .catch(error => {
+            console.error(error);
+            resultBox.innerText = "Error!";
+            button.disabled = false;
+        });
+
+    }, 1000); // 1 second delay
 }
 </script>
 
