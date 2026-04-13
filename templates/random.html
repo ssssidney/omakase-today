@@ -16,7 +16,7 @@
     <!-- GACHA IMAGE -->
     <img id="gachaImg" class="gacha-img"
      src="{{ url_for('static', filename='gacha.png') }}">
-     
+
     <div class="machine-box">
 
         <div id="result">
@@ -42,24 +42,30 @@ function spin() {
     // start spin animation
     gachaImg.classList.add("spin");
 
-    resultBox.innerText = "Spinning...";
+resultBox.innerText = "Spinning...";
 
-    setTimeout(() => {
+gachaImg.classList.add("spin");
 
-        fetch('/random')
-        .then(res => res.json())
-        .then(data => {
+setTimeout(() => {
 
+    fetch('/random')
+    .then(res => res.json())
+    .then(data => {
+
+        resultBox.innerText = "Revealing...";
+
+        setTimeout(() => {
             resultBox.innerText = "You got: " + data.recipe;
 
-            // stop animation
             gachaImg.classList.remove("spin");
 
             button.disabled = false;
 
-        });
+        }, 500);
 
-    }, 1000);
+    });
+
+}, 1000);
 }
 </script>
 
